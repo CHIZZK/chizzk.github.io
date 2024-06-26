@@ -48,7 +48,7 @@ solve 1 finally, rank:4
 solve 2 finally, rank:5
 ````
 ***结论：<br>1.不带return时，如果try中没有异常，执行顺序为try-finally； 如果try中有异常，执行顺序为try-catch-finally；
-</br>2.如果方法有多层内嵌，若里层的方法通过catch进行```捕获```，就不会在外层catch中进行捕获，如果是```(throws)抛出```,则会在上层方法的catch中捕获。***
+<br>2.如果方法有多层内嵌，若里层的方法通过catch进行```捕获```，就不会在外层catch中进行捕获，如果是```(throws)抛出```,则会在上层方法的catch中捕获。***
 ### 2.带return的执行顺序
 ```java
 public class ExceptionTest {
