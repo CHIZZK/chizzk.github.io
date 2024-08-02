@@ -1,6 +1,6 @@
 ---
 layout: post
-title: maven
+title: Java-Basic
 date: 2024-07-26
 tags: [java]
 author: chizzk
