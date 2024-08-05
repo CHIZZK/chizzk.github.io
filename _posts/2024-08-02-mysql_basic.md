@@ -2,7 +2,7 @@
 layout: post
 title: Mysql_basic
 date: 2024-07-26
-tags: [java]
+tags: [mysql]
 author: chizzk
 ---
 ## MySQL
