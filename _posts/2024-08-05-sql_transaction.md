@@ -6,4 +6,7 @@ tags: [mysql]
 author: chizzk
 ---
 ## sql-transaction
-
+>读未提交
+>读已提交
+>可重复读
+>串行化
