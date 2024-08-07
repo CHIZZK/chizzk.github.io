@@ -67,8 +67,6 @@ InnoDB在每行数据都增加三个隐藏字段：一个唯一行号，一个�
 1. 如果被访问版本的trx_id属性值与rv中的creator_trx_id值相同 可见
 2. 如果被访问版本的trx_id属性值小于rv中的min_trx_id值 可见
 3. 如果被访问版本的trx_id属性值大于或等于rv中的max_trx_id值 不可见
-4. 如果被访问版本的trx_id属性值在rv的min_trx_id和max_trx_id之间
-    4.1 trx_id在m_ids中 不可见
-    4.2 trx_id不在m_ids中 可见
-   
-**8. MVCC机制的实现就是通过read-view机制与undo版本链比对机制，使得不同的事务会根据数据版本链对比规则读取同一条数据在版本链上的不同版本数据。**
+4. 如果被访问版本的trx_id属性值在rv的min_trx_id和max_trx_id之间<br>
+    4.1 trx_id在m_ids中 不可见<br>
+    4.2 trx_id不在m_ids中 可见<br>
