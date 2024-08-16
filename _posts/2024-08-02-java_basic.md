@@ -37,3 +37,46 @@ author: chizzk
 
 ---
 
+Class类：代表了运行时环境中的类和接口的信息
+1. 获取类信息的方法
+- getName():返回类的全限定名称
+- getSimpleName():返回类的简单名称（没有包名的部分）
+- getCanonicalName():返回类的规范名称，如果有则返回简单名称加上包名，否则返回null
+- getPackage():返回类所在的包
+- getModifiers():返回表示类修饰符的整数，例如：public，static，final等
+
+2. 获取构造器和方法的方法
+- getConstructors():返回所有公共构造器的数组
+- getDeclaredConstructors():返回所有声明的构造器的数组
+- getMethods():返回所有公共方法的数组
+- getDeclaredMethods():返回所有声明的方法的数组
+- getMethod(String name, Class<?>...parameterTypes):返回指定名称和参数类型的公共方法
+- getDeclaredMethod(String name, Class<?>...parameterTypes):返回指定名称和参数类型的声明方法
+
+3. 获取字段和注解的方法
+- getFields(): 返回所有公共字段的数组
+- getDeclaredFields(): 返回所有声明的字段的数组
+- getField(String name): 返回指定名称的公共字段
+- getDeclaredField(String name): 返回指定名称的声明字段
+- getAnnotations(): 返回类上所有注解的数组
+
+4. 实例化和调用方法
+- newInstance(): 创建并返回这个类的一个新实例（需要有无参构造器）
+- getMethod(String name, Class<?>... parameterType).invoke(Object obj, Object...args): 调用对象上的指定方法
+
+5. 类型和继承结构
+- getSuperclass():返回直接超类的Class对象
+- getInterfaces():返回实现的所有接口的Class对象数组
+- isAssignableFrom(Class<?> cls):测试指定的类是否可以被此类所赋值
+
+6. 其他
+- forName(String className): 根据类的字符串名称获取对应的Class对象
+- isInstance(): 如果类是一个接口，则返回true
+- isPrimitive(): 如果类是一个原始类型，则返回true
+- isArray(): 如果类是一个数组，则返回true
+- isEnum(): 如果类是一个枚举，则返回true
+
+这些方法使得Java的```反射机制（Reflect）```非常强大，可以动态的创建和操作对象
+
+---
+
