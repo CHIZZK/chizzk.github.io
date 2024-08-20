@@ -61,17 +61,131 @@ author: chizzk
 ```
 ### 门栓
 ```text
+public class CountDownLatchTest {
+
+    public static void main(String[] args) throws InterruptedException {
+        List<String> list = Arrays.asList("January","February","March","April","May","June","July","August","September","October");
+
+        CountDownLatch countDownLatch = new CountDownLatch(10);
+        ExecutorService exec = Executors.newFixedThreadPool(10);
+        for (int i = 0; i < 10; i++) {
+            int idx = i;
+            exec.execute(() ->{
+                try{
+                    System.out.println(list.get(idx) + " is coming");
+                    Thread.sleep(3000);
+                }catch (Exception e) {
+                }finally {
+                    countDownLatch.countDown();
+                }
+            });
+        }
+        countDownLatch.await();
+        System.out.println("no November and December");
+        exec.shutdown();
+    }
+}
 
 ```
 ### 可重入锁
 ```text
+public class ReentrantLockTest {
+
+    private static ReentrantLock lock = new ReentrantLock(true);
+
+    private static List<String> list = Arrays.asList("路人甲", "路人乙", "路人丙", "路人丁", "路人戊", "路人己", "路人庚", "路人壬", "路人癸", "韦小宝");
+
+    public static void main(String[] args) {
+        for (int i = 0; i < 10; i++) {
+            int idx = i;
+
+            new Thread(() -> {
+                try {
+                    招收杂役(list.get(idx));
+                } catch (InterruptedException ignore) {
+                }
+            }).start();
+
+            if (idx == 9) {
+                new Thread(() -> {
+                    招收太监(list.get(idx));
+                }).start();
+            }
+        }
+    }
+
+    public static void 招收杂役(String name) throws InterruptedException {
+        lock.lock();
+        try {
+            while (true) {
+                System.out.println(name + "，排队等待进宫当杂役...");
+                Thread.sleep(1000);
+            }
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    public static void 招收太监(String name) {
+        System.out.println(name + "，进宫当太监，不用排队！");
+    }
+}
 
 ```
 ### 读写锁
 ```text
-
-```
-### 信号量锁
-```text
-
+public class ReentrantReadWriteLockTest {
+    private static final ReentrantReadWriteLock reentrantReadWriteLock = new ReentrantReadWriteLock();
+    private static final ReentrantReadWriteLock.ReadLock readLock = reentrantReadWriteLock.readLock();
+    private static final ReentrantReadWriteLock.WriteLock writeLock = reentrantReadWriteLock.writeLock();
+    private static Deque<String> deque = new ArrayDeque<>();
+    
+    
+    
+    
+    public static String get() {
+        readLock.lock();
+        try {
+           return deque.poll();
+        } finally {
+            readLock.unlock();
+        }
+    }
+    
+    public static void put(String str) {
+        writeLock.lock();
+        try {
+            deque.add(str);
+        } finally {
+            writeLock.unlock();
+        }
+    }
+    public static void main(String[] args) {
+        new Thread(()->{
+            while (true) {
+                put("1");
+                put("2");
+                put("3");
+                put("4");
+                put("5");
+                put("6");
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                }
+            }
+        }).start();
+        
+        
+        new Thread(()->{ while (true) {
+            System.out.println("得到的数字是"+get());
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                
+            }
+            }
+        }).start();
+    }
+}
 ```
