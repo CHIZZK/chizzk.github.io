@@ -26,6 +26,13 @@ author: chizzk
 #### Intention Locks
 
 
+#### Record Locks
+
+#### Gap Locks
+
+#### Next-Key Locks
+
+
 
 
 
